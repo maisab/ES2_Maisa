@@ -108,11 +108,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 # STATIC_URL = '/static/'
-STATIC_URL = '/static/'
-# MEDIA_URL = '/media/'
-# STATIC_ROOT='/home/humberto/Documentos/projectUtfpr/desenvolvimento/static/'
-# MEDIA_ROOT='/home/humberto/Documentos/projectUtfpr/desenvolvimento/media/'
-#
+STATIC_URL = '/home/hgoncalves/Documentos/ES2_Maisa/DocumentosTecnicos/mysite/hemonucleo/static/'
+MEDIA_URL = '/home/hgoncalves/Documentos/ES2_Maisa/DocumentosTecnicos/mysite/hemonucleo/media/'
+STATIC_ROOT='/home/hgoncalves/Documentos/ES2_Maisa/DocumentosTecnicos/mysite/hemonucleo/static/'
+MEDIA_ROOT='/home/hgoncalves/Documentos/ES2_Maisa/DocumentosTecnicos/mysite/hemonucleo/media/'
+
 #
 #
 # HAYSTACK_CONNECTIONS = {
