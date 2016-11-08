@@ -1,9 +1,21 @@
 from django.conf.urls import url
 
+from django.contrib import admin
+
+from mysite import settings
+from django.conf.urls.static import static
+from django.conf.urls import url
+from hemonucleo import views
+from django.conf.urls import handler400, handler403, handler404, handler500
+
+admin.autodiscover()
+
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.index, name='index')
+    url(r'^$', views.index, name='index'),
+    url(r'^doacao$', views.doacao, name='doacao'),
+    url(r'^name$', views.name, name='name')
 #     urlpatterns = [
 #     url(r'^$', views.index, name='index'),
 #     url(r'^/curso$', views.curso, name='curso'),
@@ -15,4 +27,4 @@ urlpatterns = [
 #     url(r'^/curso/(?P<sigla_curso>.+)/(?P<ementa>.+)$', views.detailCursoEmenta, name='detailCursoEmenta'),
 #     url(r'^/professor/(?P<professor_nome>.+)$', views.detailsProfessor, name='details'),
 #     url(r'^/projeto/(?P<projeto_nome>.+)$', views.detailsProjeto, name='detailsProjeto'),
-]
+]+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

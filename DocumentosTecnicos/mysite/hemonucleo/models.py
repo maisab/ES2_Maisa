@@ -3,6 +3,9 @@ from datetime import datetime
 from django.db import models
 
 # Create your models here.
+from django.utils import timezone
+
+
 class Funcionario(models.Model):
     nome = models.CharField('Nome do Funcionario',max_length=200)
     permissao = models.BooleanField(default=False)

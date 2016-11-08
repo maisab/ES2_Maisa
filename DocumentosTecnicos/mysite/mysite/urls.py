@@ -18,6 +18,7 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^hemonucleo/', include('hemonucleo.urls')),
+    url(r'^hemonucleo/', include('hemonucleo.urls',namespace="hemonucleo")),
+
     # url(r'^hemonucleo/search', include('haystack.urls', namespace="search")),
 ]
