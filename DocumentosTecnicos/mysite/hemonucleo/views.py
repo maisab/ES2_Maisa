@@ -1,6 +1,6 @@
 from django.core.paginator import PageNotAnInteger, Paginator, EmptyPage
 
-from hemonucleo.forms import PostForm
+from hemonucleo.forms import DoacaoForm
 from .models import *
 # from django
 from itertools import chain
@@ -42,25 +42,24 @@ def name(request):
     return HttpResponse(template.render(context, request))
 
 
-def post_new(request):
-    form = PostForm()
+def name(request):
+    form = DoacaoForm()
     return render(request, 'name.html', {'form': form})
 
+def get_name(request):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = NameForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return HttpResponseRedirect('/thanks/')
 
-# def get_name(request):
-#     # if this is a POST request we need to process the form data
-#     if request.method == 'POST':
-#         # create a form instance and populate it with data from the request:
-#         form = NameForm(request.POST)
-#         # check whether it's valid:
-#         if form.is_valid():
-#             # process the data in form.cleaned_data as required
-#             # ...
-#             # redirect to a new URL:
-#             return HttpResponseRedirect('/thanks/')
-#
-#     # if a GET (or any other method) we'll create a blank form
-#     else:
-#         form = NameForm()
-#
-#     return render(request, 'name.html', {'form': form})
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = NameForm()
+
+    return render(request, 'name.html', {'form': form})

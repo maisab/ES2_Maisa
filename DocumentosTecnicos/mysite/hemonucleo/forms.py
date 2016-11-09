@@ -1,5 +1,9 @@
 from django import forms
 
-class PostForm(forms.ModelForm):
-    title = forms.CharField(max_length=100)
-    text = forms.CharField(max_length=100)
+from hemonucleo.models import Doacao
+
+
+class DoacaoForm(forms.ModelForm):
+    class Meta:
+        model = Doacao
+        fields = ('doador', 'codigoDaAmostra','idade','outros','endereco','tipoDeDoacao','hospitalDeInternacao','procedimento', 'funcionario','data')

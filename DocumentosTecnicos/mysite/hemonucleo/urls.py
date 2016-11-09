@@ -15,7 +15,7 @@ from . import views
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^doacao$', views.doacao, name='doacao'),
-    url(r'^name$', views.name, name='name')
+    url(r'^name/$', views.name, name='name')
 #     urlpatterns = [
 #     url(r'^$', views.index, name='index'),
 #     url(r'^/curso$', views.curso, name='curso'),
