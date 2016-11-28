@@ -16,9 +16,16 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from django.conf.urls import include, url
+from django.contrib import admin
+# Add this import
+from django.contrib.auth import views
+from hemonucleo.forms import LoginForm
+
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^hemonucleo/', include('hemonucleo.urls',namespace="hemonucleo")),
-
+    url(r'^', include('hemonucleo.urls', namespace="hemonucleo")),
+    url(r'^login/$', views.login, {'template_name': 'login.html', 'authentication_form': LoginForm}),
+    url(r'^logout/$', views.logout, {'next_page': '/login'}),
     # url(r'^hemonucleo/search', include('haystack.urls', namespace="search")),
 ]

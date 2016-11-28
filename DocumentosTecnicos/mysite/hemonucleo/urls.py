@@ -1,10 +1,13 @@
 from django.conf.urls import url
 
 from django.contrib import admin
+from django.views.generic import TemplateView
 
 from mysite import settings
 from django.conf.urls.static import static
 from django.conf.urls import url
+from django.contrib.auth import views as auth_views
+
 from hemonucleo import views
 from django.conf.urls import handler400, handler403, handler404, handler500
 
@@ -13,9 +16,12 @@ admin.autodiscover()
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
+    # url(r'^$', views.index, name='index'),
     url(r'^doacao$', views.doacao, name='doacao'),
-    url(r'^name/$', views.name, name='name')
+    url(r'^historico/$', views.historico, name='historico'),
+    url(r'^doador/$', views.doador, name='doador'),
+    url(r'^$', views.home, name='home'),
+
 #     urlpatterns = [
 #     url(r'^$', views.index, name='index'),
 #     url(r'^/curso$', views.curso, name='curso'),

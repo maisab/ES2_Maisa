@@ -93,7 +93,7 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
 TIME_ZONE = 'UTC'
 
@@ -112,7 +112,7 @@ STATIC_URL = '/home/hgoncalves/Documentos/ES2_Maisa/DocumentosTecnicos/mysite/he
 MEDIA_URL = '/home/hgoncalves/Documentos/ES2_Maisa/DocumentosTecnicos/mysite/hemonucleo/media/'
 STATIC_ROOT='/home/hgoncalves/Documentos/ES2_Maisa/DocumentosTecnicos/mysite/hemonucleo/static/'
 MEDIA_ROOT='/home/hgoncalves/Documentos/ES2_Maisa/DocumentosTecnicos/mysite/hemonucleo/media/'
-
+LOGIN_REDIRECT_URL = '/' # It means home view
 #
 #
 # HAYSTACK_CONNECTIONS = {

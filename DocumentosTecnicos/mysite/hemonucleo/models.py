@@ -18,7 +18,7 @@ class Doador(models.Model):
     nome = models.CharField('Nome do Doador',max_length=200)
     endereco = models.CharField('Endereco',max_length=200)
     idade = models.IntegerField(default=0)
-    outros = models.CharField('Outros', max_length=200)
+    outrosDados = models.CharField('Outros', max_length=200)
     nomeDoPai = models.CharField('Nome do Pai', max_length=200)
     nomeDoMae = models.CharField('Nome do Mae', max_length=200)
 
