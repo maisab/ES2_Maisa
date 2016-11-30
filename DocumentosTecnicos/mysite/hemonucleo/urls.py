@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^historico/$', views.historico, name='historico'),
     url(r'^doador/$', views.doador, name='doador'),
     url(r'^$', views.home, name='home'),
+    url(r'^doador/(?P<nome>.+)/$', views.cadastroComSucesso, name="doador"),
 
 #     urlpatterns = [
 #     url(r'^$', views.index, name='index'),

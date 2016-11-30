@@ -5,7 +5,7 @@ from .models import *
 # from django
 from itertools import chain
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, Http404
 from django.template import Context, loader
 from django.shortcuts import render
@@ -42,6 +42,7 @@ from django.http import HttpResponseRedirect
 #     return HttpResponse(template.render(context, request))
 
 def doacao(request):
+
     form = DoacaoForm()
     return render(request, 'doacao.html', {'form': form})
 
@@ -56,9 +57,35 @@ def historico(request):
     # return render(request, 'historico.html', {'form': form,'latest_question_list': latest_question_list,})
     return render(request, 'historico.html', {'form': form})
 
+# def doador(request):
+#
+#     if request.method == "POST":
+#         form = DoadorForm(request.POST)
+#         if form.is_valid():
+#             post = form.save(commit=False)
+#             # post.nome = request.user
+#             # post.published_date = timezone.now()
+#             post.save()
+#     else:
+#         form = DoadorForm()
+#         return render(request, 'doador.html', {'form': form})
+
+def cadastroComSucesso(request,nome):
+    post =  Doador.objects.get(nome=nome)
+    return render(request, 'cadastroComSucesso.html', {'post': post})
+
 def doador(request):
-    form = DoadorForm()
-    return render(request, 'doador.html', {'form': form})
+    if request.method == "POST":
+        form = DoadorForm(request.POST)
+        if form.is_valid():
+            post = form.save()
+            # post.author = request.user
+            # post.published_date = timezone.now()
+            post.save()
+            return redirect('cadastroComSucesso', nome=post.nome)
+    else:
+        form = DoadorForm()
+        return render(request,  'doador.html', {'form': form})
 
 # def get_name(request):
 #     # if this is a POST request we need to process the form data

@@ -53,8 +53,8 @@ class Doador(models.Model):
     celular = models.CharField('celular', max_length=200)
     email =models.EmailField()
 
-
-
+    def __unicode__(self):
+        return  "{0}, {1}, {2},{3}".format(self.nome, self.email, self.telefone, self.celular)
 
 
 
