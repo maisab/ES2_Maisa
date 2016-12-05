@@ -10,6 +10,9 @@ class Funcionario(models.Model):
     nome = models.CharField('Nome do Funcionario',max_length=200)
     permissao = models.BooleanField(default=False)
 
+    def __unicode__(self):
+        return self.nome
+
 
 class Gerente(models.Model):
     nome = models.CharField('Nome do Gerente',max_length=200)
@@ -25,11 +28,11 @@ class Doador(models.Model):
     masculino = 'M'
     feminino = 'F'
 
-    sexo = (
+    genero = (
         (masculino, 'Masculino'),
         (feminino, 'Feminino'),
     )
-    sexo = models.CharField(max_length=1, choices=sexo,default=masculino)
+    sexo = models.CharField(max_length=1, choices=genero,default=masculino)
 
     solteiro = 'S'
     casado = 'C'

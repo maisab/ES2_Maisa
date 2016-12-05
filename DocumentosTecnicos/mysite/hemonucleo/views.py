@@ -13,8 +13,8 @@ from django.http import HttpResponseRedirect
 # from .forms import NameForm
 
 def index(request):
-    latest_question_list = Doador.objects.order_by('-pub_date')[:5]
-    template = loader.get_template('index.html')
+    latest_question_list = Doador.objects.order_by('nome')
+    template = loader.get_template('home.html')
     context = {
         'latest_question_list': latest_question_list,
     }
@@ -28,19 +28,6 @@ def doacao(request):
     }
     return HttpResponse(template.render(context, request))
 
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
-
-# from .forms import NameForm
-
-# def name(request):
-#     latest_question_list = Doacao.objects.order_by('-pub_date')[:5]
-#     template = loader.get_template('name.html')
-#     context = {
-#         'latest_question_list': latest_question_list,
-#     }
-#     return HttpResponse(template.render(context, request))
-
 def doacao(request):
 
     form = DoacaoForm()
@@ -48,27 +35,7 @@ def doacao(request):
 
 def historico(request):
     form = DoacaoForm()
-    # latest_question_list = Historico.objects.order_by('doador')
-        # template = loader.get_template('name.html')
-    # context = {
-    #     'latest_question_list': latest_question_list,
-    # }
-        # return HttpResponse(template.render(context, request))
-    # return render(request, 'historico.html', {'form': form,'latest_question_list': latest_question_list,})
     return render(request, 'historico.html', {'form': form})
-
-# def doador(request):
-#
-#     if request.method == "POST":
-#         form = DoadorForm(request.POST)
-#         if form.is_valid():
-#             post = form.save(commit=False)
-#             # post.nome = request.user
-#             # post.published_date = timezone.now()
-#             post.save()
-#     else:
-#         form = DoadorForm()
-#         return render(request, 'doador.html', {'form': form})
 
 def cadastroComSucesso(request,nome):
     post =  Doador.objects.get(nome=nome)
@@ -79,17 +46,15 @@ def doador(request):
         form = DoadorForm(request.POST)
         if form.is_valid():
             post = form.save()
-            # post.author = request.user
-            # post.published_date = timezone.now()
-            post.save()
-            return redirect('cadastroComSucesso', nome=post.nome)
+            return HttpResponseRedirect('cadastroComSucesso', nome=post.nome)
     else:
         form = DoadorForm()
-        return render(request,  'doador.html', {'form': form})
+
+    return render(request,  'doador.html', {'form': form})
 
 # def get_name(request):
 #     # if this is a POST request we need to process the form data
-#     if request.method == 'POST':
+#     if request.method == 'POST':r
 #         # create a form instance and populate it with data from the request:
 #         form = NameForm(request.POST)
 #         # check whether it's valid:
@@ -114,4 +79,10 @@ from django.contrib.auth.decorators import login_required
 # view without authenticating
 @login_required(login_url="login/")
 def home(request):
-    return render(request,"home.html")
+    latest_question_list = Doacao.objects.order_by('-data')
+    template = loader.get_template('home.html')
+    context = {
+        'latest_question_list': latest_question_list,
+    }
+    return HttpResponse(template.render(context, request))
+    # return (request,"home.html")
