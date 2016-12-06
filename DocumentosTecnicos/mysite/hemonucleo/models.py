@@ -21,9 +21,9 @@ class Doador(models.Model):
     nome = models.CharField('Nome do Doador',max_length=200)
     endereco = models.CharField('Endereco',max_length=200)
     idade = models.IntegerField(default=0)
-    outrosDados = models.CharField('Outros', max_length=200)
-    nomeDoPai = models.CharField('Nome do Pai', max_length=200)
-    nomeDoMae = models.CharField('Nome do Mae', max_length=200)
+    outrosDados = models.CharField('Outros', max_length=200, blank=True, null=True)
+    nomeDoPai = models.CharField('Nome do Pai', max_length=200, blank=True, null=True )
+    nomeDoMae = models.CharField('Nome do Mae', max_length=200, blank=True, null=True)
 
     masculino = 'M'
     feminino = 'F'
@@ -42,18 +42,18 @@ class Doador(models.Model):
         (casado, 'Casado'),
         (outros, 'Outros'),
     )
-    estadoCivil = models.CharField(max_length=1, choices=tipo, default=solteiro)
+    estadoCivil = models.CharField(max_length=1, choices=tipo, default=solteiro, blank=True, null=True)
 
-    nacionalidade = models.CharField('Nacionalidade', max_length=200)
-    RG = models.CharField('RG', max_length=15)
-    orgaoExpedidor =models.CharField('Orgao Expedidor', max_length=10)
-    CPF =models.CharField('CPF', max_length=20)
-    profissao = models.CharField('Profissao', max_length=100)
-    trabalhoAtual = models.CharField('Trabalho Atual', max_length=200)
-    municipio= models.CharField('Municipio', max_length=200)
-    estado = models.CharField('Estado', max_length=200)
-    telefone = models.CharField('Telefone', max_length=200)
-    celular = models.CharField('celular', max_length=200)
+    nacionalidade = models.CharField('Nacionalidade', max_length=200, blank=True, null=True)
+    RG = models.CharField('RG', max_length=15, blank=True, null=True)
+    orgaoExpedidor =models.CharField('Orgao Expedidor', max_length=10, blank=True, null=True)
+    CPF =models.CharField('CPF', max_length=20, blank=True, null=True)
+    profissao = models.CharField('Profissao', max_length=100, blank=True, null=True)
+    trabalhoAtual = models.CharField('Trabalho Atual', max_length=200, blank=True, null=True)
+    municipio= models.CharField('Municipio', max_length=200, blank=True, null=True)
+    estado = models.CharField('Estado', max_length=200, blank=True, null=True)
+    telefone = models.CharField('Telefone', max_length=200, blank=True, null=True)
+    celular = models.CharField('celular', max_length=200, blank=True, null=True)
     email =models.EmailField()
 
     def __unicode__(self):
@@ -65,9 +65,9 @@ class Doador(models.Model):
 class Doacao(models.Model):
     doador = models.ForeignKey(Doador,on_delete=models.CASCADE)
     codigoDaAmostra = models.IntegerField('Codigo da Amostra', default=000000)
-    endereco = models.CharField('Endereco',max_length=200)
-    idade = models.IntegerField(default=0)
-    outros = models.CharField('Outros', max_length=200)
+    endereco = models.CharField('Endereco',max_length=200, blank=True, null=True)
+    idade = models.IntegerField(default=0, blank=True, null=True)
+    outros = models.CharField('Outros', max_length=200, blank=True, null=True)
 
 
     espontanea = 'ES'
@@ -81,7 +81,7 @@ class Doacao(models.Model):
         (autologa, 'Autologa'),
     )
     tipoDeDoacao = models.CharField(max_length=2, choices=tipo, default=espontanea)
-    hospitalDeInternacao =  models.CharField('Hospital de Internacao', max_length=200)
+    hospitalDeInternacao =  models.CharField('Hospital de Internacao', max_length=200, blank=True, null=True)
     coletaConvencional = 'CC'
     aferese= 'AF'
 
@@ -95,11 +95,11 @@ class Doacao(models.Model):
 
 
 class UltimaDoacao(models.Model):
-    peso =models.CharField('Peso da amostra',max_length=10)
-    hematocrito =models.CharField("Hematocrito", max_length=10)
-    hemoglobina = models.CharField('Hemoglobina', max_length=10)
-    pulso = models.CharField('Pulso', max_length=10)
-    pressaoArterial = models.CharField('Pressao Arterial', max_length=10)
+    peso =models.CharField('Peso da amostra',max_length=10, blank=True, null=True)
+    hematocrito =models.CharField("Hematocrito", max_length=10, blank=True, null=True)
+    hemoglobina = models.CharField('Hemoglobina', max_length=10, blank=True, null=True)
+    pulso = models.CharField('Pulso', max_length=10, blank=True, null=True)
+    pressaoArterial = models.CharField('Pressao Arterial', max_length=10, blank=True, null=True)
     apto = 'AP'
     inapto = 'IN'
     inaptoTemporariamente ='IT'
@@ -109,8 +109,8 @@ class UltimaDoacao(models.Model):
         (inapto, 'Inapto'),
         (inaptoTemporariamente, 'Inapto Temporariamente')
     )
-    data = models.DateTimeField(default=datetime.now, blank=True)
-    apto = models.CharField(max_length=2, choices=tipo, default=inapto)
+    data = models.DateTimeField(default=datetime.now, blank=True, null=True)
+    apto = models.CharField(max_length=2, choices=tipo, default=inapto, blank=True, null=True)
     nenhuma = 'NE'
     leve = 'LE'
     moderada ='MO'
@@ -122,12 +122,12 @@ class UltimaDoacao(models.Model):
         (grave, 'Grave')
     )
     # data = models.DateTimeField(default=datetime.now, blank=True)
-    reacoes = models.CharField(max_length=2, choices=tipo, default=grave)
+    reacoes = models.CharField(max_length=2, choices=tipo, default=grave, blank=True, null=True)
     descricaoDaReacao = models.CharField('Pulso', max_length=200)
 
 
 class Historico(models.Model):
-    descricao = models.IntegerField(default=0)
-    historico = models.CharField(max_length=1000)
-    votes = models.IntegerField(default=0)
+    descricao = models.IntegerField(default=0, blank=True, null=True)
+    historico = models.CharField(max_length=1000, blank=True, null=True)
+    votes = models.IntegerField(default=0, blank=True, null=True)
     doador = models.ForeignKey(Doador, on_delete=models.CASCADE)

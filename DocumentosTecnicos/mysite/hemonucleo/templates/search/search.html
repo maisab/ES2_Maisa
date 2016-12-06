@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="jumbotron">
+            <h1>Histórico</h1>
+            <form action="/search " method="get" class="form-inline">
+              <div class="form-group">
+                <label for="exampleInputName2">Nome</label>
+                <input type="text" class="form-control" id="exampleInputName2" placeholder="Digite o sua pesquisa aqui"
+                       name="q" size="40" size="" value="Digite o sua pesquisa aqui"
+                               onfocus="this.value='';"     autocomplete="on">
+              </div>
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </form></div>
+      </div>
+
+    <table class="table">
+        <caption>Optional table caption.</caption>
+        <thead>
+             <tr> <th>Nome</th> <th>Idade</th> <th>Sexo</th> <th>Codigo da Amostra</th> <th>Procedimento</th></tr>
+        </thead>
+           <tbody>
+
+  {% if query %}
+  <!--<h3>Resultado</h3>-->
+  {% for i in page.object_list %}
+
+
+
+            <tr><th scope="row">{{i.doador.nome}}</th> <td>{{i.doador.idade}}</td> <td>{{i.doador.get_sexo_display}}</td> <td>{{i.codigoDaAmostra}}</td>  <td>{{i.get_procedimento_display}}</td></tr>
+
+        {% endfor %}
+
+</tbody>
+
+    </table>
+  <p>Não foi encontrado resultados.</p>
+
+  {% if page.has_previous or page.has_next %}
+  <div>
+    {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Anterior{% if page.has_previous %}</a>{% endif %}
+    |
+    {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Próximo &raquo;{% if page.has_next %}</a>{% endif %}
+  </div>
+  {% endif %}
+  {% else %}
+  {# Show some example queries to run, maybe query syntax, something else? #}
+  {% endif %}
+</form>
+{% endblock content %}

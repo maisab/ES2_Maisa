@@ -8,10 +8,9 @@ from hemonucleo.models import *
 class DoadorSearch(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
     nome = indexes.CharField(model_attr='nome')
-    professor = indexes.CharField()
 
-    def prepare_tag_name(self, object):
-        return object.professor.nome
+    # def prepare_tag_name(self, object):
+    #     return object.professor.nome
 
     def get_model(self):
         return Doador

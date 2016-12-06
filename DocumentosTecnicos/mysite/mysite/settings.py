@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'hemonucleo',
     'haystack',
+    'input_mask'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -54,13 +55,7 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'mysite.urls'
 
-import os
-HAYSTACK_CONNECTIONS = {
-    'default': {
-        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
-        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
-    },
-}
+
 
 TEMPLATES = [
     {
@@ -75,6 +70,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
             ],
         },
     },
@@ -124,10 +120,11 @@ MEDIA_ROOT='/home/hgoncalves/Documentos/ES2_Maisa/DocumentosTecnicos/mysite/hemo
 LOGIN_REDIRECT_URL = '/' # It means home view
 #
 #
-# HAYSTACK_CONNECTIONS = {
-#     'default': {
-#         'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
-#         'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
-#         'HAYSTACK_SITECONF': 'haystack.search_sites',
-#     },
-# }
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+        'HAYSTACK_SITECONF': 'haystack.search_sites',
+    },
+}
+APPEND_SLASH=False

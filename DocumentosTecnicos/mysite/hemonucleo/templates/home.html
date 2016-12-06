@@ -1,13 +1,37 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    {% if form.errors %}
+
+<p> Seu usuário e senha estão incorretors. Tente de novo.</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+
+<p> Voê não possui acesso a página. Para proceder, por favor digite um login e senha corretos.</p>
+    {% else %}
+
+<p>Por favor, logue para entrar.</p>
+    {% endif %}
+{% endif %}
 
 <div class="container">
     <div class="row">
         <div class="jumbotron">
             <h1>Últimas Doações</h1>
-            <a class="navbar-brand" href="#">Sistema de Hemonúcleo</a>
+            <!--<a class="navbar-brand" href="#">Sistema de Hemonúcleo</a>-->
+             <p></p><form action="/search " method="get" class="form-inline">
+              <div class="form-group">
+                <label for="exampleInputName2">Nome</label>
+                <input type="text" class="form-control" id="exampleInputName2" placeholder="Digite o sua pesquisa aqui"
+                       name="q" size="40" size="" value="Digite o sua pesquisa aqui"
+                               onfocus="this.value='';"     autocomplete="on">
+              </div>
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </form>
         </div>
+
         <table class="table">
             <caption></caption>
             <thead>

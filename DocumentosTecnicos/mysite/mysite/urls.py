@@ -27,6 +27,6 @@ urlpatterns = [
     url(r'^', include('hemonucleo.urls', namespace="hemonucleo")),
     url(r'^login/$', views.login, {'template_name': 'login.html', 'authentication_form': LoginForm}),
     url(r'^logout/$', views.logout, {'next_page': '/login'}),
-    url(r'^search/', include('haystack.urls')),
+    url(r'^search/', include('haystack.urls', namespace="haystack")),
     # url(r'^hemonucleo/search', include('haystack.urls', namespace="search")),
 ]

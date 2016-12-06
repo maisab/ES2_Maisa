@@ -1,10 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-FOi
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if form.errors %}
+
+<p> Seu usuário e senha estão incorretors. Tente de novo.</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+
+<p> Voê não possui acesso a página. Para proceder, por favor digite um login e senha corretos.</p>
+    {% else %}
+
+<p>Por favor, logue para entrar.</p>
+    {% endif %}
+{% endif %}
+
+<div class="container">
+    <div class="row">
+        <div class="jumbotron">
+            <h1>Cadastro ralizado com Sucesso</h1>
+            <!--<a class="navbar-brand" href="#">Sistema de Hemonúcleo</a>-->
+             <p></p><form action="/search " method="get" class="form-inline">
+              <div class="form-group">
+                <label for="exampleInputName2">Nome</label>
+                <input type="text" class="form-control" id="exampleInputName2" placeholder="Digite o sua pesquisa aqui"
+                       name="q" size="40" size="" value="Digite o sua pesquisa aqui"
+                               onfocus="this.value='';"     autocomplete="on">
+              </div>
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </form>
+        </div>
+
+        <!--<table class="table">-->
+            <!--<caption></caption>-->
+            <!--<thead>-->
+                <!--<tr> <th>Nome</th> <th>Idade</th> <th>Sexo</th> <th>Codigo da Amostra</th> <th>Procedimento</th></tr>-->
+            <!--</thead>-->
+            <!--<tbody>-->
+             <!--{%for  i in latest_question_list%}-->
+                <!--<tr><th scope="row">{{i.doador.nome}}</th> <td>{{i.doador.idade}}</td> <td>{{i.doador.get_sexo_display}}</td> <td>{{i.codigoDaAmostra}}</td>  <td>{{i.get_procedimento_display}}</td></tr>-->
+             <!--{% endfor %}-->
+            <!--</tbody>-->
+        <!--</table>-->
+</div>
+{% endblock %}

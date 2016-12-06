@@ -1,31 +1,82 @@
 {% extends 'base.html' %}
 {% block content %}
+    {% if form.errors %}
+
+<p> Seu usuário e senha estão incorretors. Tente de novo.</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+
+<p> Voê não possui acesso a página. Para proceder, por favor digite um login e senha corretos.</p>
+    {% else %}
+
+<p>Por favor, logue para entrar.</p>
+    {% endif %}
+{% endif %}
 <div class="container">
     <div class="row">
         <div class="jumbotron">
             <h1>Histórico</h1>
-            <form class="form-inline">
+            <form action="/search " method="get" class="form-inline">
               <div class="form-group">
                 <label for="exampleInputName2">Nome</label>
-                <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+                <input type="text" class="form-control" id="exampleInputName2" placeholder="Digite o sua pesquisa aqui"
+                       name="q" size="40" size="" value="Digite o sua pesquisa aqui"
+                               onfocus="this.value='';"     autocomplete="on">
               </div>
-
-              <button type="submit" class="btn btn-primary">Buscar</button>
+                <button type="submit" class="btn btn-primary">Buscar</button>
             </form>
+ <!--<li class="text">-->
 
+                        <!--<input type="text" name="q" size="40" size="" value="Digite o sua pesquisa aqui"-->
+                               <!--onfocus="this.value='';"-->
+                               <!--autocomplete="on" class="s"/>-->
+                        <!--<input class="searchform" type="submit" value="Buscar" />-->
+                    <!--</form>-->
+                <!--</li>-->
         </div>
     </div>
+      </table>
+
+
     <table class="table">
-        <caption>Optional table caption.</caption>
+        <!--<caption>Optional table caption.</caption>-->
         <thead>
-            <tr> <th>#</th> <th>First Name</th> <th>Last Name</th> <th>Username</th> </tr>
+           <tr> <th>Nome</th> <th>Idade</th> <th>Sexo</th> <th>Codigo da Amostra</th> <th>Procedimento</th></tr>
         </thead>
-        <tbody>
-            <tr><th scope="row">1</th> <td>Mark</td> <td>Otto</td> <td>@mdo</td> </tr>
-            <tr><th scope="row">2</th> <td>Jacob</td> <td>Thornton</td> <td>@fat</td> </tr>
-            <tr><th scope="row">3</th> <td>Larry</td> <td>the Bird</td> <td>@twitter</td> </tr>
+           <tbody>
+            {% for i in historico %}
+
+             <tr><th scope="row">{{i.doador.nome}}</th> <td>{{i.doador.idade}}</td> <td>{{i.doador.get_sexo_display}}</td> <td>{{i.codigoDaAmostra}}</td>  <td>{{i.get_procedimento_display}}</td></tr>
+
+              {% endfor %}
         </tbody>
+
     </table>
+
+                    <br/>
+
+
+                              <div class="pagination">
+                    <span class="step-links">
+                                <br/>
+                        <br/>
+                        <br/>
+                        {% if historico.has_previous %}
+
+                            <a href="?page={{ historico.previous_page_number }}">Anterior</a>
+                        {% endif %}
+
+                        <span class="current">
+                            Página {{ historico.number }} de {{ historico.paginator.num_pages }}
+                        </span>
+
+                        {% if historico.has_next %}
+                            <a href="?page={{ historico.next_page_number }}">Próxima</a>
+                        {% endif %}
+    </span>
+
         <!--<div class="row">-->
         <!--<div class="jumbotron">-->
 
